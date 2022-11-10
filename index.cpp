@@ -115,18 +115,31 @@ void printResult(string res, Game &board)
 // Game Functions
 int playGame(Game &board)
 {
+    cout << "  ";
     genHorizLine(board.cols * 2);
     while (true)
     {
         for (int i = 0; i < board.rows; ++i)
         {
+            if (i == 0)
+            {
+                cout << "  ";
+                for (int colNum = 0; colNum < board.cols; ++colNum)
+                {
+                    cout << colNum << " ";
+                }
+                cout << "\n";
+            }
             for (int j = 0; j < board.cols; ++j)
             {
+                if (j == 0)
+                {
+                    cout << i << "|";
+                }
                 cout << board.gameBoard[i][j] << " ";
             }
             cout << "\n";
         }
-        genHorizLine(board.cols * 2);
         if (board.cleared == board.clearFields)
         {
             printResult("WIN!", board);
@@ -134,11 +147,12 @@ int playGame(Game &board)
         }
         cout << "Turn: " << board.turn++ << " - " << board.cleared << "/" << board.clearFields << "\n";
         int col, row;
-        cout << "Enter column: ";
-        cin >> col;
         cout << "Enter row: ";
         cin >> row;
+        cout << "Enter column: ";
+        cin >> col;
         int res = replGameBoard(board, row, col);
+        cout << "  ";
         genHorizLine(board.cols * 2);
         if (res == 1)
         {
@@ -153,7 +167,7 @@ int replGameBoard(Game &board, int i, int j)
     if (board.process2[i][j] == '*')
         return 1;
     board.gameBoard[i][j] = board.process2[i][j];
-    board.cleared++;
+    ++board.cleared;
     return 0;
 }
 
