@@ -18,8 +18,12 @@ using namespace std;
     Submitted to: Sir Reginald Cheng
     Course: CCS0003L - Computer Programming 1
 
-    Initialization Algorithm Time Complexity: O(n^2) - Quadratic
+    Board Generation Algorithm Time Complexity: O(n*m) - Bilinear
+    Board Generation Algorithm Space Complexity: 0(n^2) - Quadratic
     Search Algorithm Time Complexity: 0(1) - Constant
+
+
+
 
     Program Flow:
     1. Display the game title.
@@ -93,9 +97,9 @@ void printSolution(Game &board)
 {
     cout << "Solution:\n";
     genHorizLine(board.cols * 2);
-    for (int i = 0; i < board.rows; i++)
+    for (int i = 0; i < board.rows; ++i)
     {
-        for (int j = 0; j < board.cols; j++)
+        for (int j = 0; j < board.cols; ++j)
         {
             cout << board.process2[i][j] << " ";
         }
@@ -126,7 +130,7 @@ int playGame(Game &board)
                 cout << "  ";
                 for (int colNum = 0; colNum < board.cols; ++colNum)
                 {
-                    cout << colNum << " ";
+                    cout << colNum % 10 << " ";
                 }
                 cout << "\n";
             }
@@ -134,7 +138,7 @@ int playGame(Game &board)
             {
                 if (j == 0)
                 {
-                    cout << i << "|";
+                    cout << i % 10 << "|";
                 }
                 cout << board.gameBoard[i][j] << " ";
             }
@@ -248,7 +252,7 @@ void initBoards(Game &board)
 int inputMeta(Game &board)
 {
     cout << "TN05 - Project Minesweeper\n";
-    cout << string(28, '_') << "\n";
+    genHorizLine(30);
 
     char difficulty;
     cout << "Enter the number of rows: ";
